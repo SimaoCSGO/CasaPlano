@@ -36,6 +36,7 @@
       color: var(--text-light);
       z-index: 999;
       transition: all 0.6s ease;
+      backdrop-filter: blur(6px);
     }
 
     .header-content {
@@ -105,6 +106,31 @@
       transform: scale(1.05);
     }
 
+.theme-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.theme-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.theme-button img {
+  width: 28px;
+  height: 28px;
+  filter: invert(0%);
+  transition: filter 0.3s ease;
+}
+
+.dark-mode .theme-button img {
+  filter: invert(100%);
+}
+
+
     .container {
       max-width: 900px;
       margin: 50px auto;
@@ -138,6 +164,7 @@
       text-align: center;
       padding: 30px 20px;
       margin-top: 60px;
+      transition: background 0.3s, color 0.3s;
     }
 
     .dark-mode {
@@ -156,6 +183,26 @@
 
     .dark-mode footer {
       background-color: #000;
+    }
+
+    body:not(.dark-mode) header {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #111;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    body:not(.dark-mode) nav ul li a {
+      color: #111;
+    }
+
+    body:not(.dark-mode) nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    body:not(.dark-mode) footer {
+      background-color: #eaeaea;
+      color: #111;
     }
 
     @media (max-width: 768px) {
@@ -188,8 +235,8 @@
           <li><a href="index.html">Voltar</a></li>
         </ul>
       </nav>
-<button id="theme-toggle" class="btn-cta">
-  <img id="theme-icon" src="moon.png" alt="Tema" style="width: 24px; height: 24px;">
+<button id="theme-toggle" class="theme-button" aria-label="Alternar tema">
+  <img id="theme-icon" src="lua.png" alt="Tema" />
 </button>
 
     </div>
@@ -247,29 +294,29 @@
   </footer>
 
   <!-- SCRIPT MODO ESCURO -->
-<script>
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeIcon = document.getElementById('theme-icon');
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
 
-  function setThemeIcon(isDark) {
-    themeIcon.src = isDark ? "sun.png" : "lua.png";
-    themeIcon.alt = isDark ? "Modo claro" : "Modo escuro";
-  }
-
-  window.addEventListener('load', () => {
-    const isDark = localStorage.getItem("theme") === "dark";
-    if (isDark) {
-      document.body.classList.add("dark-mode");
+    function setThemeIcon(isDark) {
+      themeIcon.src = isDark ? "sun.png" : "lua.png";
+      themeIcon.alt = isDark ? "Modo claro" : "Modo escuro";
     }
-    setThemeIcon(isDark);
-  });
 
-  themeToggle.addEventListener('click', () => {
-    const isDark = document.body.classList.toggle('dark-mode');
-    setThemeIcon(isDark);
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  });
-</script>
+    window.addEventListener('load', () => {
+      const isDark = localStorage.getItem("theme") === "dark";
+      if (isDark) {
+        document.body.classList.add("dark-mode");
+      }
+      setThemeIcon(isDark);
+    });
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark-mode');
+      setThemeIcon(isDark);
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+  </script>
 
 </body>
 </html>
