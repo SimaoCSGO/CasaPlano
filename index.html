@@ -8,11 +8,10 @@
   <meta name="keywords" content="CasaPlano, engenharia, construção civil, projetos, obras, arquitetura, orçamentos, Torres Vedras">
   <meta name="author" content="CasaPlano">
   <meta name="robots" content="index, follow">
-  <link rel="icon" href="sun.png" type="image/png">
+  <link rel="icon" href="casaPlanoImgMini.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
   <style>
     :root {
       --primary: #ffb100;
@@ -36,7 +35,7 @@
     }
 
     h2 {
-      color: #ffb100;
+      color: var(--primary);
       margin-top: 40px;
     }
 
@@ -201,6 +200,7 @@
       color: var(--text-light);
       text-align: center;
       padding: 30px 20px;
+      transition: background 0.3s, color 0.3s;
     }
 
     #top-btn {
@@ -238,23 +238,116 @@
       background: rgba(20, 20, 20, 0.95);
     }
 
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 10px;
-      }
+    .dark-mode footer {
+      background-color: var(--secondary);
+      color: var(--text-light);
+    }
 
-      nav ul {
-        flex-direction: column;
-      }
+    body:not(.dark-mode) header {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #111;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(6px);
+    }
+
+    body:not(.dark-mode) nav ul li a {
+      color: #111;
+    }
+
+    body:not(.dark-mode) nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    body:not(.dark-mode) footer {
+      background-color: #eaeaea;
+      color: #111;
+    }
+
+    .theme-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+
+    .theme-button:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-button img {
+      width: 28px;
+      height: 28px;
+      filter: invert(0%);
+      transition: filter 0.3s ease;
+    }
+
+    .dark-mode .theme-button img {
+      filter: invert(100%);
+    }
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+  }
+
+  nav ul {
+    flex-direction: row; /* ALTERADO de column para row */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+  }
+
+  nav ul li a {
+    font-size: 0.95rem;
+    padding: 5px 10px;
+  }
+
+  .theme-button {
+    margin-top: 10px;
+  }
 
       .section {
         flex-direction: column;
-        padding: 60px 20px;
+        padding: 40px 20px;
+      }
+
+      .col-img img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .col-text {
+        text-align: center;
+      }
+
+      .col-text p, .col-text ul {
+        font-size: 1rem;
+      }
+
+      .swiper-container {
+        padding: 0 10px;
+      }
+
+      iframe {
+        height: 250px;
+      }
+
+      #top-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
       }
     }
   </style>
-</head><body>
+</head>
+<body>
 
 <header id="main-header">
   <div class="header-content">
@@ -269,11 +362,9 @@
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
-
-<button id="theme-toggle" class="btn-cta">
-  <img id="theme-icon" src="lua.png" alt="Modo escuro" style="width: 24px; height: 24px;">
-</button>
-
+    <button id="theme-toggle" class="theme-button" aria-label="Alternar tema">
+      <img id="theme-icon" src="lua.png" alt="Tema" />
+    </button>
   </div>
 </header>
 
@@ -283,19 +374,18 @@
   </div>
   <div class="col-text">
     <h2>Sobre Nós</h2>
-<br/>
+    <br/>
     <p>Fundada em 2015, a CasaPlano Engenharia e Construção é especializada em obras públicas e privadas.</p>
     <p>A nossa missão é construir com qualidade, segurança e sustentabilidade.</p>
-	<br/>
+    <br/>
     <a href="DetalheSobreNos.html" class="btn-cta">Mais Detalhes</a>
   </div>
 </section>
 
-
 <section id="servicos" class="section section-rounded">
   <div class="col-text">
     <h2>Serviços</h2>
-<br/>
+    <br/>
     <ul>
       <li>Construção civil pública e privada</li>
       <li>Projetos de arquitetura e engenharia</li>
@@ -311,7 +401,7 @@
   <div class="col-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Projetos realizados"></div>
   <div class="col-text">
     <h2>Projetos</h2>
-<br/>
+    <br/>
     <ul>
       <li>Centro Escolar do Oeste – 2022 – €450.000</li>
       <li>Praça Central – 2023 – €310.000</li>
@@ -327,6 +417,8 @@
 
 <div class="swiper-container">
   <div class="swiper-wrapper">
+    <div class="swiper-slide"><img src="CasaPovoa1.jpg"/></div>
+    <div class="swiper-slide"><img src="CasasGibraltar1.jpg"/></div>
     <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7"/></div>
     <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1590650046871-92c887180603"/></div>
     <div class="swiper-slide"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"/></div>
@@ -336,16 +428,15 @@
 <section id="contacto" class="section section-rounded">
   <div class="col-text">
     <h2>Contacto</h2>
-<br/>
+    <br/>
     <p><strong>Morada:</strong> Av. Tenente Valadim 7A, 2560-277 Torres Vedras</p>
     <p><strong>Telefone:</strong> +351 261 932 352</p>
     <p><strong>Email:</strong> geral.casaplano@gmail.com</p>
-<br/>
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=geral.casaplano@gmail.com" target="_blank" class="btn-cta">Entre em Contacto</a>
-
+    <br/>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=geral.casaplano@gmail.com" target="_blank" class="btn-cta">Entre em Contacto</a>
   </div>
   <div class="col-img">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.292774898292!2d-9.258240684657558!3d39.092389179539584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1f28e6f2ef45d3%3A0x9c4c5f79ea935b58!2sAv.%20Tenente%20Valadim%207A%2C%202560-277%20Torres%20Vedras!5e0!3m2!1spt-PT!2spt!4v1719335030000!5m2!1spt-PT!2spt" allowfullscreen="" loading="lazy" style="border-radius: 12px;"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=..." allowfullscreen="" loading="lazy"></iframe>
   </div>
 </section>
 
@@ -357,11 +448,25 @@
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
-  new Swiper('.swiper-container', {
-    loop: true,
-    autoplay: { delay: 3000 },
-    slidesPerView: 1,
-  });
+new Swiper('.swiper-container', {
+  loop: true,
+  centeredSlides: true,
+  slidesPerView: 1.5,
+  spaceBetween: 30,
+  autoplay: {
+    delay: 6000,
+    disableOnInteraction: false,
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 1.5,
+    },
+    1024: {
+      slidesPerView: 1.5,
+    }
+  }
+});
+
 
   const header = document.getElementById('main-header');
   const sections = document.querySelectorAll('.section');
